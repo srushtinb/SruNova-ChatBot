@@ -18,7 +18,7 @@ async function chatbot() {
         output: process.stdout
     });
 
-    console.log("🤖 Gemini Chatbot (Type 'exit' to stop)");
+    console.log("🤖 Lexi (Type 'exit' to stop)");
 
     async function askQuestion() {
         rl.question("You: ", async (userInput) => {
@@ -30,7 +30,7 @@ async function chatbot() {
 
             try {
                 const result = await model.generateContent(userInput);
-                console.log("Chatbot:", result.response.text());
+                console.log("Lexi:", result.response.text());
             } catch (error) {
                 console.error("⚠️ Error:", error);
             }
