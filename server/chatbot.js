@@ -22,16 +22,12 @@ app.post("/api/chat", async (req, res) => {
     if (!message?.trim()) {
       return res.status(400).json({ error: "Message required" });
     }
-
     console.log("User:", message);
-
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: message,
     });
-
     const reply = response.text;
-
     console.log("SruNova:", reply);
     res.json({ reply });
   } catch (error) {
@@ -40,7 +36,11 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(` SruNova backend live at http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`SruNova backend live at http://localhost:${PORT}`);
+  });
+}
+
+export default app;
